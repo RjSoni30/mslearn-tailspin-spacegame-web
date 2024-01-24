@@ -3,7 +3,7 @@ on:
   workflow_dispatch
 
 env:
-  SKIP_QGS: "'ALL', 'QG1'"
+  SKIP_QGS: 'QG1'
 
 jobs:
   Skip_All_QGs:
