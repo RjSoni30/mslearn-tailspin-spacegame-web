@@ -1,31 +1,17 @@
 name: Testing Workflow
 on: 
-  workflow_dispatch
+  push
 
 env:
   SKIP_QGS: 'QG1'
 
 jobs:
-  Skip_All_QGs:
-    if: contains( ${{env.SKIPS_QGS}}, 'ALL' )
+  PipelineExecution:
     runs-on: windows-latest
     steps:
-    - name: 'Skipping All Quality Gates'
+    - name: 'Quality Gates'
       run: |
-        echo "Skipping All Quality Gates"
-  
-  Skip_QG1:
-    if: contains( ${{env.SKIPS_QGS}}, 'QG1' )
-    runs-on: windows-latest
-    steps:
-    - name: 'Skipping QG1 Quality Gates'
-      run: |
-        echo "Skipping QG1 Quality Gates"
-
-  Skip_QG2:
-    if: contains( ${{env.SKIPS_QGS}}, 'QG2' )
-    runs-on: windows-latest
-    steps:
-    - name: 'Skipping QG2 Quality Gates'
-      run: |
-        echo "Skipping QG2 Quality Gates"
+        if [[ contains( ${{env.SKIP_QGS}}, 'QG1') ]]
+          echo "Skipping All Quality Gates"
+        else
+          echo "Running Quality Gates"
