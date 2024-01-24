@@ -11,7 +11,5 @@ jobs:
     steps:
     - name: 'Quality Gates'
       run: |
-        if [[ contains( ${{env.SKIP_QGS}}, 'QG1') ]]
-          echo "Skipping All Quality Gates"
-        else
-          echo "Running Quality Gates"
+        echo "Skipping QG1 Quality Gates"
+      if: contains( ${{env.SKIP_QGS}}, 'QG1')
