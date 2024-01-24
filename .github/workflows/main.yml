@@ -11,7 +11,14 @@ env:
   SKIP_QGS: 'QG1'
 
 jobs:
+  JobProperties:
+    runs-on: windows-latest
+    steps:
+    - run: echo "Preparing Job Properties"
+    outputs:
+      Skipping_QGs: ${{ env.SKIP_QGS }}
+      
   PipelineExecution:
     uses: ./.github/workflows/CalledWF.yml
     with:
-      SKIP_QG_Values: ${{ env.SKIP_QGS }}
+      SKIP_QG_Values: ${{ needs.JobProperties.outputs.Skipping_QGs }}
