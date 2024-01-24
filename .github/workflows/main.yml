@@ -13,3 +13,6 @@ jobs:
       run: |
         echo "Skipping QG1 Quality Gates"
       if: ${{ !contains(${{env.SKIP_QGS}}, 'QG1') }}
+    - name: running something
+      run: |
+        echo "Running something"
