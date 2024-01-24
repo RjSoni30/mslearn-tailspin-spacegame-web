@@ -3,12 +3,29 @@ on:
   workflow_dispatch
 
 env:
-  SKIP_QGS: 'ALL'
+  SKIP_QGS: "'ALL', 'QG1'"
 
 jobs:
-  Skip_QGs: 
+  Skip_All_QGs:
+    if: contains( ${{env.SKIPS_QGS}}, 'ALL' )
     runs-on: windows-latest
     steps:
-    - name: 'Skipping Quality Gates'
+    - name: 'Skipping All Quality Gates'
       run: |
-        echo "Skipping Quality Gates $SKIP_QGS"
+        echo "Skipping All Quality Gates"
+  
+  Skip_QG1:
+    if: contains( ${{env.SKIPS_QGS}}, 'QG1' )
+    runs-on: windows-latest
+    steps:
+    - name: 'Skipping QG1 Quality Gates'
+      run: |
+        echo "Skipping QG1 Quality Gates"
+
+  Skip_QG2:
+    if: contains( ${{env.SKIPS_QGS}}, 'QG2' )
+    runs-on: windows-latest
+    steps:
+    - name: 'Skipping QG2 Quality Gates'
+      run: |
+        echo "Skipping QG2 Quality Gates"
