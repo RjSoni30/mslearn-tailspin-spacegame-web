@@ -2,7 +2,7 @@ name: Testing Workflow
 on: push
 
 env:
-  SKIP_QGS: 'QG1'
+  SKIP_QGS: QG1
 
 jobs:
   JobProperties:
