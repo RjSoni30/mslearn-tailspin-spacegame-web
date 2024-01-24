@@ -1,11 +1,5 @@
 name: Testing Workflow
-on: 
-  push:
-    branches:
-    - master
-    paths: 
-    - ./.github/workflows/**
-  workflow_dispatch:
+on: push
 
 env:
   SKIP_QGS: 'QG1'
@@ -19,6 +13,5 @@ jobs:
       Skipping_QGs: ${{ env.SKIP_QGS }}
       
   PipelineExecution:
+    if: ${{ !contains(needs.JobProperties.outputs.Skipping_QGs, 'QG1') }}
     uses: ./.github/workflows/CalledWF.yml
-    with:
-      SKIP_QG_Values: ${{ needs.JobProperties.outputs.Skipping_QGs }}
