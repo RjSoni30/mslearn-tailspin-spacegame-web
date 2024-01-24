@@ -12,4 +12,4 @@ jobs:
     - name: 'Quality Gates'
       run: |
         echo "Skipping QG1 Quality Gates"
-      if: "!contains( ${{env.SKIP_QGS}}, 'QG1')"
+      if: "!(contains(${{env.SKIP_QGS}}, 'QG1'))"
