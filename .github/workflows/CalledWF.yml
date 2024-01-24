@@ -1,0 +1,16 @@
+name: CalledWorkflow
+on: 
+  workflow_call:
+    inputs:
+      SKIP_QG_Values: 
+        required: true
+        type: string
+
+jobs:
+  Job1:
+    if: ${{ !contains(inputs.SKIP_QG_Values, 'QG1') }}
+    runs-on: windows_latest
+    steps:
+    - name: 'Job1 Step - 1'
+      run: |
+        echo "Running Job1"
