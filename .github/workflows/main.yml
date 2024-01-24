@@ -1,18 +1,14 @@
 name: Testing Workflow
 on: 
-  push
+  push:
+    paths: 
+    - ./.github/workflows/main.yml
 
 env:
   SKIP_QGS: 'QG1'
 
 jobs:
   PipelineExecution:
-    runs-on: windows-latest
-    steps:
-    - name: 'Quality Gates'
-      run: |
-        echo "Skipping QG1 Quality Gates"
-      if: ${{ !contains(env.SKIP_QGS, 'QG1') }}
-    - name: running something
-      run: |
-        echo "Running something"
+    uses: ./.github/workflows/CalledWF.yml
+    with:
+      SKIP_QG_Values: ${{ env.SKIP_QGS }}
