@@ -1,6 +1,8 @@
 name: Testing Workflow
 on: 
   push:
+    branches:
+    - master
     paths: 
     - ./.github/workflows/main.yml
 
