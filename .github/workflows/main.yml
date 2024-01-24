@@ -2,16 +2,18 @@ name: Testing Workflow
 on: push
 
 env:
-  SKIP_QGS: QG1
+  SKIP_QGS: "QG1 QG2"
 
 jobs:
   JobProperties:
     runs-on: windows-latest
     steps:
-    - run: echo "Preparing Job Properties"
+    - run: |
+        echo "Preparing Job Properties"
+        echo "Skipping Any Quality Gates: ${{ contains(env.SKIP_QGS, 'QG1') }}"
     outputs:
       Skipping_QGs: ${{ env.SKIP_QGS }}
       
   PipelineExecution:
-    if: ${{ !contains(needs.JobProperties.outputs.Skipping_QGs, 'QG1') }}
+    if: contains(needs.JobProperties.outputs.Skipping_QGs, 'QG2')
     uses: ./.github/workflows/CalledWF.yml
