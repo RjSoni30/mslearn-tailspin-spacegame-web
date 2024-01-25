@@ -23,5 +23,5 @@ jobs:
       
   PipelineExecution:
     needs: PrintValues
-    if: ${{ !(contains(needs.Job1.outputs.output1, 'QG2')) ||  !(contains(needs.Job1.outputs.output1, 'QG1')) }}
+    if: ${{ !( (contains(needs.Job1.outputs.output1, 'QG2')) ||  (contains(needs.Job1.outputs.output1, 'QG1')) ) }}
     uses: ./.github/workflows/CalledWF.yml
