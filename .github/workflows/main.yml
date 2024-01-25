@@ -10,10 +10,16 @@ jobs:
     steps:
     - run: |
         echo "Preparing Job Properties"
-        echo "Skipping Any Quality Gates: ${{ !contains(env.SKIP_QGS, 'QG1') }}"
+        echo "Skipping Any Quality Gates: ${{ !contains(env.SKIP_QGS, 'QG2') }}"
     outputs:
       Skipping_QGs: ${{ env.SKIP_QGS }}
+
+  PrintValues:
+    runs-on: windows-latest
+    steps:
+    - run: |
+        echo "are we running any quality gates: ${{ !(contains(needs.JobProperties.outputs.Skipping_QGs, 'QG2')) }}"
       
   PipelineExecution:
-    if: "false"
+    if: ${{ !(contains(needs.JobProperties.outputs.Skipping_QGs, 'QG2')) }}
     uses: ./.github/workflows/CalledWF.yml
