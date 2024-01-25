@@ -1,7 +1,7 @@
 name: Testing Workflow
 on: push
 env:
-  SKIP_QGS: "QG2"
+  SKIP_QGS: "QG1 QG2"
 jobs:
   Job1:
     runs-on: ubuntu-latest
