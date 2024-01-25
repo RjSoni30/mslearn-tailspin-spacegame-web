@@ -12,7 +12,7 @@ jobs:
         echo "Preparing Job Properties"
         echo "Skipping Any Quality Gates: ${{ !contains(env.SKIP_QGS, 'QG2') }}"
     outputs:
-      Skipping_QGs: ${{ env.SKIP_QGS }}
+      Skipping_QGs: "${{ env.SKIP_QGS }}"
 
   PrintValues:
     runs-on: windows-latest
