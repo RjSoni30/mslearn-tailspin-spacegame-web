@@ -19,7 +19,7 @@ jobs:
     steps:
     - env:
           value1: ${{needs.JobProperties.outputs.output1}}
-    run: |
+      run: |
         echo "$value1"
         echo "are we running any quality gates: ${{ !(contains($value1, 'QG2')) }}"
       
