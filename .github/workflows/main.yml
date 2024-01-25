@@ -10,17 +10,8 @@ jobs:
     steps:
       - id: step1
         run: echo "test=${{ env.SKIP_QGS }}" >> "$Env:GITHUB_OUTPUT"
-  PrintValues:
-    runs-on: windows-latest
-    needs: Job1
-    steps:
-      - env:
-          value1: ${{needs.Job1.outputs.output1}}
-        run: |
-          echo "${{env.value1}}"
-          echo "${{needs.Job1.outputs.output1}}"
-      
-  PipelineExecution:
+  
+  Job2:
     needs: PrintValues
     if: ${{ !( (contains(needs.Job1.outputs.output1, 'QG2')) ||  (contains(needs.Job1.outputs.output1, 'QG1')) ) }}
     uses: ./.github/workflows/CalledWF.yml
