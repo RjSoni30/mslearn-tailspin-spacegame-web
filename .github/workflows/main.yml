@@ -9,9 +9,7 @@ jobs:
     runs-on: windows-latest
     steps:
     - id: step1
-      run: |
-        echo "Skipping Any Quality Gates: ${{ !contains(env.SKIP_QGS, 'QG2') }}"
-        echo "test=${{ env.SKIP_QGS }}" >> "$GITHUB_OUTPUT"
+      run: echo "test=${{ env.SKIP_QGS }}" >> "$GITHUB_OUTPUT"
     outputs:
       output1: ${{ steps.step1.outputs.test }}
 
