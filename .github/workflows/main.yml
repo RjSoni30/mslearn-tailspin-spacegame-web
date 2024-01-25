@@ -1,7 +1,7 @@
 name: Testing Workflow
 on: push
 env:
-  SKIP_QGS: "QG1 QG2"
+  SKIP_QGS: "QG1"
 jobs:
   Job1:
     runs-on: ubuntu-latest
@@ -17,11 +17,11 @@ jobs:
       - env:
           value1: ${{needs.Job1.outputs.output1}}
         run: |
-          echo "$value1"
+          echo "${{env.value1}}"
           echo "${{needs.Job1.outputs.output1}}"
           echo "are we running any quality gates: ${{ !(contains(env.value1, 'QG2')) }}"
       
   PipelineExecution:
     needs: PrintValues
-    if: ${{ !(contains(needs.Job1.outputs.output1, 'QG2')) }}
+    if: ${{ !(contains(needs.Job1.outputs.output1, 'QG2')) ||  !(contains(needs.Job1.outputs.output1, 'QG1')) }}
     uses: ./.github/workflows/CalledWF.yml
