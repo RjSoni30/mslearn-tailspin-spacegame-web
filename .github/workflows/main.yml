@@ -18,7 +18,7 @@ jobs:
     runs-on: windows-latest
     steps:
     - run: |
-        echo ${{ needs.JobProperties.outputs.Skipping_QGs }}
+        echo "${{ needs.JobProperties.outputs.Skipping_QGs }}"
         echo "are we running any quality gates: ${{ !(contains(needs.JobProperties.outputs.Skipping_QGs, 'QG2')) }}"
       
   PipelineExecution:
