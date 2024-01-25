@@ -10,11 +10,11 @@ jobs:
     steps:
       - id: step1
         run: |
-        {
-          echo "test<<EOF"
-          ${{ env.SKIP_QGS }}
-          echo EOF
-        } >> "$GITHUB_OUTPUT"
+          {
+            echo "test<<EOF"
+            ${{ env.SKIP_QGS }}
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
   PrintValues:
     runs-on: windows-latest
     needs: Job1
