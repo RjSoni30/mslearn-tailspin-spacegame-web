@@ -8,19 +8,20 @@ jobs:
   JobProperties:
     runs-on: windows-latest
     steps:
-    - run: |
-        echo "Preparing Job Properties"
+    - id: step1
+      run: |
         echo "Skipping Any Quality Gates: ${{ !contains(env.SKIP_QGS, 'QG2') }}"
+        echo "test=${{ env.SKIP_QGS }}" >> "$GITHUB_OUTPUT"
     outputs:
-      Skipping_QGs: "${{ env.SKIP_QGS }}"
+      output1: ${{ steps.step1.outputs.test }}
 
   PrintValues:
     runs-on: windows-latest
     steps:
     - run: |
-        echo "${{ needs.JobProperties.outputs.Skipping_QGs }}"
-        echo "are we running any quality gates: ${{ !(contains(needs.JobProperties.outputs.Skipping_QGs, 'QG2')) }}"
+        echo "${{ needs.JobProperties.outputs.output1 }}"
+        echo "are we running any quality gates: ${{ !(contains(needs.JobProperties.outputs.output1, 'QG2')) }}"
       
   PipelineExecution:
-    if: ${{ !(contains(needs.JobProperties.outputs.Skipping_QGs, 'QG2')) }}
+    if: ${{ !(contains(needs.JobProperties.outputs.output1, 'QG2')) }}
     uses: ./.github/workflows/CalledWF.yml
