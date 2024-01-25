@@ -5,6 +5,6 @@ jobs:
   Job3:
     runs-on: windows-latest
     steps:
-    - name: 'Job1 Step - 1'
+    - name: 'Job3 Step'
       run: |
-        echo "Running Job1"
+        echo "Running Job3"
