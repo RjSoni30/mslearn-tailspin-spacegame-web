@@ -8,18 +8,18 @@ jobs:
     outputs:
       output1: ${{ steps.step1.outputs.test }}
     steps:
-    - id: step1
-      run: echo "test=${{ env.SKIP_QGS }}" >> "$GITHUB_OUTPUT"
+      - id: step1
+        run: echo "test=${{ env.SKIP_QGS }}" >> "$GITHUB_OUTPUT"
   PrintValues:
     runs-on: windows-latest
     needs: Job1
     steps:
-    - env:
-        value1: ${{needs.Job1.outputs.output1}}
-      run: |
-        echo "$value1"
-        echo "${{needs.Job1.outputs.output1}}"
-        echo "are we running any quality gates: ${{ !(contains(env.value1, 'QG2')) }}"
+      - env:
+          value1: ${{needs.Job1.outputs.output1}}
+        run: |
+          echo "$value1"
+          echo "${{needs.Job1.outputs.output1}}"
+          echo "are we running any quality gates: ${{ !(contains(env.value1, 'QG2')) }}"
       
   PipelineExecution:
     needs: PrintValues
