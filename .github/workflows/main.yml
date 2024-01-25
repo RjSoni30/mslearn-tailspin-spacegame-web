@@ -13,5 +13,5 @@ jobs:
   
   Job2:
     needs: Job1
-    if: ${{ !( (contains(needs.Job1.outputs.output1, 'QG2')) ||  (contains(needs.Job1.outputs.output1, 'QG1')) ) }}
+    if: ${{ ( !( (contains(needs.Job1.outputs.output1, 'QG2')) || (contains(needs.Job1.outputs.output1, 'QG1')) ) || (startsWith(github.ref, 'refs/heads/master')) ) }}
     uses: ./.github/workflows/CalledWF.yml
