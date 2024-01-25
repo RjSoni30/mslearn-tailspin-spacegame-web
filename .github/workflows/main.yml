@@ -21,6 +21,7 @@ jobs:
         value1: ${{needs.JobProperties.outputs.output1}}
       run: |
         echo "$value1"
+        echo "${{needs.JobProperties.outputs.output1}}"
         echo "are we running any quality gates: ${{ !(contains(env.value1, 'QG2')) }}"
       
   PipelineExecution:
