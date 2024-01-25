@@ -7,11 +7,11 @@ env:
 jobs:
   JobProperties:
     runs-on: windows-latest
+    outputs:
+      output1: ${{ steps.step1.outputs.test }}
     steps:
     - id: step1
       run: echo "test=${{ env.SKIP_QGS }}" >> "$GITHUB_OUTPUT"
-    outputs:
-      output1: ${{ steps.step1.outputs.test }}
 
   PrintValues:
     runs-on: windows-latest
