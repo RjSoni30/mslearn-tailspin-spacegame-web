@@ -1,7 +1,7 @@
 name: Testing Workflow
 on: push
 env:
-  SKIP_QGS: "QG1"
+  SKIP_QGS: "QG2"
 jobs:
   Job1:
     runs-on: ubuntu-latest
@@ -9,7 +9,7 @@ jobs:
       output1: ${{ steps.step1.outputs.test }}
     steps:
       - id: step1
-        run: echo "test=QG2" >> "$GITHUB_OUTPUT"
+        run: echo "test=${{ env.SKIP_QGS }}" >> "$GITHUB_OUTPUT"
   PrintValues:
     runs-on: windows-latest
     needs: Job1
