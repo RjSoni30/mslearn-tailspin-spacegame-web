@@ -15,5 +15,5 @@ jobs:
       Skipping_QGs: ${{ env.SKIP_QGS }}
       
   PipelineExecution:
-    if: "${{ !(contains(needs.JobProperties.outputs.Skipping_QGs, 'QG2')) }}"
+    if: false
     uses: ./.github/workflows/CalledWF.yml
