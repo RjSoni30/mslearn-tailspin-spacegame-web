@@ -4,12 +4,12 @@ env:
   SKIP_QGS: "QG1 QG3"
 jobs:
   Job1:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     outputs:
       output1: ${{ steps.step1.outputs.test }}
     steps:
       - id: step1
-        run: echo "test=${{ env.SKIP_QGS }}" >> "$GITHUB_OUTPUT"
+        run: echo "test=${{ env.SKIP_QGS }}" >> "$Env:GITHUB_OUTPUT"
   PrintValues:
     runs-on: windows-latest
     needs: Job1
