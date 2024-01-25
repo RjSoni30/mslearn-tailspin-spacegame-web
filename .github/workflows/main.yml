@@ -17,9 +17,11 @@ jobs:
     runs-on: windows-latest
     needs: JobProperties
     steps:
-    - run: |
-        echo "${{ needs.JobProperties.outputs.output1 }}"
-        echo "are we running any quality gates: ${{ !(contains(needs.JobProperties.outputs.output1, 'QG2')) }}"
+    - env:
+          value1: ${{needs.JobProperties.outputs.output1}}
+    run: |
+        echo "$value1"
+        echo "are we running any quality gates: ${{ !(contains($value1, 'QG2')) }}"
       
   PipelineExecution:
     needs: PrintValues
