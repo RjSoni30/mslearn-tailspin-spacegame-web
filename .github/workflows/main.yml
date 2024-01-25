@@ -12,6 +12,6 @@ jobs:
         run: echo "test=${{ env.SKIP_QGS }}" >> "$Env:GITHUB_OUTPUT"
   
   Job2:
-    needs: PrintValues
+    needs: Job1
     if: ${{ !( (contains(needs.Job1.outputs.output1, 'QG2')) ||  (contains(needs.Job1.outputs.output1, 'QG1')) ) }}
     uses: ./.github/workflows/CalledWF.yml
