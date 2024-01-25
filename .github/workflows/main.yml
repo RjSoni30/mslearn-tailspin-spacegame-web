@@ -1,27 +1,27 @@
 name: Testing Workflow
 on: push
-
 env:
   SKIP_QGS: "QG1 QG2"
-
 jobs:
-  JobProperties:
+  Job1:
     runs-on: windows-latest
     outputs:
       output1: ${{ steps.step1.outputs.test }}
     steps:
     - id: step1
       run: echo "test=${{ env.SKIP_QGS }}" >> "$GITHUB_OUTPUT"
-
   PrintValues:
     runs-on: windows-latest
-    needs: JobProperties
+    needs: Job1
     steps:
-    - run: |
-      echo "${{ needs.JobProperties.outputs.output1 }}"
-      echo "are we running any quality gates: ${{ !(contains(needs.JobProperties.outputs.output1, 'QG2')) }}"
+    - env:
+        value1: ${{needs.Job1.outputs.output1}}
+      run: |
+        echo "$value1"
+        echo "${{needs.Job1.outputs.output1}}"
+        echo "are we running any quality gates: ${{ !(contains(env.value1, 'QG2')) }}"
       
   PipelineExecution:
     needs: PrintValues
-    if: ${{ !(contains(needs.JobProperties.outputs.output1, 'QG2')) }}
+    if: ${{ !(contains(needs.Job1.outputs.output1, 'QG2')) }}
     uses: ./.github/workflows/CalledWF.yml
