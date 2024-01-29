@@ -2,6 +2,7 @@ name: Testing Workflow
 on: push
 env:
   SKIP_QGS: "QG1 QG3"
+  FORCE_RUN: false
 jobs:
   Job1:
     runs-on: windows-latest
@@ -10,8 +11,13 @@ jobs:
     steps:
       - id: step1
         run: echo "test=${{ env.SKIP_QGS }}" >> "$Env:GITHUB_OUTPUT"
+      
+      - id: step2
+        if: ${{ ( startsWith(github.ref, 'refs/heads/master') || startsWith(github.ref, 'refs/heads/release/*') ) }}
+        run: |
+          env.FORCE_RUN = true
   
   Job2:
     needs: Job1
-    if: ${{ ( !( (contains(needs.Job1.outputs.output1, 'QG2')) || (contains(needs.Job1.outputs.output1, 'QG1')) ) || (startsWith(github.ref, 'refs/heads/master')) ) }}
+    if: ${{ ( !( (contains(needs.Job1.outputs.output1, 'QG2')) || (contains(needs.Job1.outputs.output1, 'QG1')) ) || (env.FORCE_RUN) ) }}
     uses: ./.github/workflows/CalledWF.yml
