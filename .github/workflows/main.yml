@@ -19,7 +19,7 @@ jobs:
         run: |
           echo "test=${{ env.SKIP_QGS }}" >> "$GITHUB_OUTPUT"
 
-          if [ '${{ ( startsWith(github.ref, 'refs/heads/master') || startsWith(github.ref, 'refs/heads/release/*') ) }}' == 'true' ]; then
+          if [${{(startsWith(github.ref, 'refs/heads/master')||startsWith(github.ref, 'refs/heads/release/*'))}}]; then
             echo "branchName=true" >> "$GITHUB_OUTPUT"
           fi
   
