@@ -8,16 +8,16 @@ jobs:
     runs-on: windows-latest
     outputs:
       output1: ${{ steps.step1.outputs.test }}
+      output2: ${{ steps.step2.outputs.test }}
     steps:
       - id: step1
         run: echo "test=${{ env.SKIP_QGS }}" >> "$Env:GITHUB_OUTPUT"
       
       - id: step2
         if: ${{ ( startsWith(github.ref, 'refs/heads/master') || startsWith(github.ref, 'refs/heads/release/*') ) }}
-        run: |
-          env.FORCE_RUN = true
+        run: echo "test=true" >> "$Env:GITHUB_OUTPUT"
   
   Job2:
     needs: Job1
-    if: ${{ ( !( (contains(needs.Job1.outputs.output1, 'QG2')) || (contains(needs.Job1.outputs.output1, 'QG1')) ) || (env.FORCE_RUN) ) }}
+    if: ${{ ( !( (contains(needs.Job1.outputs.output1, 'QG2')) || (contains(needs.Job1.outputs.output1, 'QG1')) ) || (needs.Job1.outputs.output2) ) }}
     uses: ./.github/workflows/CalledWF.yml
