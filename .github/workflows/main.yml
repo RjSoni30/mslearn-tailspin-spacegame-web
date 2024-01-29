@@ -1,21 +1,27 @@
 name: Testing Workflow
 on: push
 env:
-  SKIP_QGS: "QG1 QG3"
-  FORCE_RUN: false
+  # Introducing quality gates for security scans & tests
+  # QG1 is ----
+  # QG2 is ----
+  # QG3 is ----
+
+  SKIP_QGS: "QG1 QG3" #Add <space> separated Quality Gates or ALL to skip one or more quality gates
+  FORCE_RUN: false    # Variable to forcefull run all the quality gates
 jobs:
   Job1:
     runs-on: windows-latest
     outputs:
       output1: ${{ steps.step1.outputs.test }}
-      output2: ${{ steps.step2.outputs.test }}
+      output2: ${{ steps.step1.outputs.branchName }}
     steps:
       - id: step1
-        run: echo "test=${{ env.SKIP_QGS }}" >> "$Env:GITHUB_OUTPUT"
-      
-      - id: step2
-        if: ${{ ( startsWith(github.ref, 'refs/heads/master') || startsWith(github.ref, 'refs/heads/release/*') ) }}
-        run: echo "test=true" >> "$Env:GITHUB_OUTPUT"
+        run: |
+          echo "test=${{ env.SKIP_QGS }}" >> "$Env:GITHUB_OUTPUT"
+
+          if [ ${{ ( startsWith(github.ref, 'refs/heads/master') || startsWith(github.ref, 'refs/heads/release/*') ) }} ]; then
+            echo "branchName=true" >> "$Env:GITHUB_OUTPUT"
+          fi
   
   Job2:
     needs: Job1
