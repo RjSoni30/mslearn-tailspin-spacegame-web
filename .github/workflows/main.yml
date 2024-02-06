@@ -32,6 +32,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Running Zaproxy's Baseline Scan
-        uses: zaproxy/action-baseline@0.10.0
+        uses: zaproxy/action-baseline@v0.10.0
         with:
           target: 'https://www.google.com'
