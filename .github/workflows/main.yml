@@ -27,3 +27,9 @@ jobs:
     needs: Job1
     if: ${{ ( !( (contains(needs.Job1.outputs.output1, 'QG2')) || (contains(needs.Job1.outputs.output1, 'QG1')) ) || (needs.Job1.outputs.output2) ) }}
     uses: ./.github/workflows/CalledWF.yml
+
+  Job4:
+    runs-on: ubuntu-latest
+    uses: zaproxy/action-baseline@0.10.0
+    with:
+      target: 'https://www.google.com'
