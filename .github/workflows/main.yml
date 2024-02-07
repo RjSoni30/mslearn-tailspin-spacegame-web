@@ -34,5 +34,5 @@ jobs:
       - name: Running Powershell script
         shell: pwsh
         run: |
-          Write-Host $env.GITHUB_WORKSPACE
+          Write-Host $env:GITHUB_WORKSPACE
           
