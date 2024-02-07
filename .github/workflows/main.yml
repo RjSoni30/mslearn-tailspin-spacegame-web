@@ -31,7 +31,8 @@ jobs:
   Job4:
     runs-on: ubuntu-latest
     steps:
-      - name: Running Zaproxy's Baseline Scan
-        uses: zaproxy/action-baseline@v0.10.0
-        with:
-          target: 'https://www.google.com'
+      - name: Running Powershell script
+        shell: pwsh
+        run: |
+          echo $env.GITHUB_WORKSPACE
+          
