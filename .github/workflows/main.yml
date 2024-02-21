@@ -23,16 +23,16 @@ jobs:
             echo "branchName=true" >> "$GITHUB_OUTPUT"
           fi
   
-  Job2:
-    needs: Job1
-    if: ${{ ( !( (contains(needs.Job1.outputs.output1, 'QG2')) || (contains(needs.Job1.outputs.output1, 'QG1')) ) || (needs.Job1.outputs.output2) ) }}
-    uses: ./.github/workflows/CalledWF.yml
+  # Job2:
+  #   needs: Job1
+  #   if: ${{ ( !( (contains(needs.Job1.outputs.output1, 'QG2')) || (contains(needs.Job1.outputs.output1, 'QG1')) ) || (needs.Job1.outputs.output2) ) }}
+  #   uses: ./.github/workflows/CalledWF.yml
 
-  Job4:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Running Powershell script
-        shell: pwsh
-        run: |
-          Write-Host $env:GITHUB_WORKSPACE
+  # Job4:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Running Powershell script
+  #       shell: pwsh
+  #       run: |
+  #         Write-Host $env:GITHUB_WORKSPACE
           
