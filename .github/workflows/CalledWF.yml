@@ -1,10 +1,19 @@
 name: CalledWorkflow
-on: workflow_call
+on:
+  pull_request: 
+    types:
+      - closed
 
 jobs:
-  Job3:
+  if_merged:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-    - name: 'Job3 Step'
-      run: |
-        echo "Running Job3"
+    - run: |
+        echo The PR was merged
+  if_not_merged:
+    if: github.event.pull_request.merged == false
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo The PR was not merged
