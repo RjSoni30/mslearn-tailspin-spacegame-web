@@ -17,8 +17,10 @@ jobs:
     steps:
       - id: step1
         run: |
-          projectname="Hi"
-          echo $projectname
+          if [ (github.ref == 'refs/heads/feature') || (github.ref == 'refs/heads/master') ] then
+            projectname="Hi"
+            echo $projectname
+          fi
           echo "test=${{ env.SKIP_QGS }}" >> "$GITHUB_OUTPUT"
 
           if [ '${{ ( startsWith(github.ref, 'refs/heads/master') || startsWith(github.ref, 'refs/heads/release/*') ) }}' == 'true' ]; then
