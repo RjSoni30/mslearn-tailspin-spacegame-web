@@ -21,7 +21,7 @@ jobs:
           then
             projectname="Hi"
             echo $projectname
-          elif [[ startsWith('${{ github.ref }}', 'refs/heads/feature') ]]
+          elif [[ ${{ github.ref }} == feature* ]]
           then
             echo "inside elif"
           fi
