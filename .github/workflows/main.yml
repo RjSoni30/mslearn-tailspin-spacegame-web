@@ -17,6 +17,8 @@ jobs:
     steps:
       - id: step1
         run: |
+          $projectname = "Hi"
+          echo $projectname
           echo "test=${{ env.SKIP_QGS }}" >> "$GITHUB_OUTPUT"
 
           if [ '${{ ( startsWith(github.ref, 'refs/heads/master') || startsWith(github.ref, 'refs/heads/release/*') ) }}' == 'true' ]; then
