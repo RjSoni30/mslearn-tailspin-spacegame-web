@@ -21,7 +21,7 @@ jobs:
           then
             projectname="Hi"
             echo $projectname
-          elif [[ startsWith(${{ github.ref }}, 'refs/heads/release') ]]
+          elif [ startsWith(${{ github.ref }}, 'refs/heads/release') ]
             then echo "inside elif"
           fi
           echo "test=${{ env.SKIP_QGS }}" >> "$GITHUB_OUTPUT"
