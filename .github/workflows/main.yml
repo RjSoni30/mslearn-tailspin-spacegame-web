@@ -17,11 +17,11 @@ jobs:
     steps:
       - id: step1
         run: |
-          if [[ (${{ github.ref }} == 'refs/heads/feature') || (${{ github.ref }} == 'refs/heads/master') ]]
+          if [[ (${{ github.ref }} == 'refs/heads/master') ]]
           then
             projectname="Hi"
             echo $projectname
-          elif [[ (startsWith('${{ github.ref }}', 'refs/heads/release')) ]]
+          elif [[ startsWith('${{ github.ref }}', 'refs/heads/feature') ]]
           then
             echo "inside elif"
           fi
