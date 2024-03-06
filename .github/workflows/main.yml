@@ -1,8 +1,5 @@
 name: Testing Workflow
-on:
-  push:
-    branches:
-       - release/**
+on: workflow_dispatch
 env:
   # Introducing quality gates for security scans & tests
   # QG1 is ----
