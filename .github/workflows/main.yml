@@ -15,7 +15,8 @@ jobs:
       output1: ${{ steps.step1.outputs.test }}
       output2: ${{ steps.step1.outputs.branchName }}
     steps:
-      - id: step1
+      - name: "This is step1"
+        id: step1
         run: |
           if [[ (${{ github.ref }} == 'refs/heads/master') ]]
           then
@@ -25,11 +26,16 @@ jobs:
           then
             echo "inside elif"
           fi
+          
           echo "test=${{ env.SKIP_QGS }}" >> "$GITHUB_OUTPUT"
 
           if [ '${{ ( startsWith(github.ref, 'refs/heads/master') || startsWith(github.ref, 'refs/heads/release/*') ) }}' == 'true' ]; then
             echo "branchName=true" >> "$GITHUB_OUTPUT"
           fi
+      - name: "This is step2"
+        run: |
+          echo "Inside step2"
+          echo "Value of Project: $projectname"
   
   # Job2:
   #   needs: Job1
