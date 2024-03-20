@@ -14,6 +14,7 @@ jobs:
     outputs:
       output1: ${{ steps.step1.outputs.test }}
       output2: ${{ steps.step1.outputs.branchName }}
+      output3: ${{ steps.step1.outputs.project }}
     steps:
       - name: "This is step1"
         id: step1
@@ -21,7 +22,7 @@ jobs:
           if [[ (${{ github.ref }} == 'refs/heads/master') ]]
           then
             projectname="Hi"
-            echo $projectname
+            echo "project=$projectname" >> "$GITHUB_OUTPUT"
           elif [[ ${{ github.ref }} == feature* ]]
           then
             echo "inside elif"
@@ -35,7 +36,7 @@ jobs:
       - name: "This is step2"
         run: |
           echo "Inside step2"
-          echo "Value of Project: $projectname"
+          echo "Value of Project: ${{ needs.Job1.outputs.output3 }}"
   
   # Job2:
   #   needs: Job1
