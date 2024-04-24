@@ -42,6 +42,7 @@ jobs:
       - name: "This is step2"
         run: |
           echo "Inside step2"
+          echo "User is: {{ github.event.pull_request.user.login }}"
           echo "Value of Project: ${{ needs.Job1.outputs.output3 }}"
   
   # Job2:
