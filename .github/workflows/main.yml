@@ -1,5 +1,11 @@
 name: Testing Workflow
-on: workflow_dispatch
+# on: workflow_dispatch
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - feature/test**
 env:
   # Introducing quality gates for security scans & tests
   # QG1 is ----
