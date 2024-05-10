@@ -1,0 +1,10 @@
+name: "Delete Event Trigger Workflow Pipeline"
+on:
+  delete
+jobs:
+  Job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Step1"
+        run: |
+          echo "This job is triggered when branch ${{ github.event.ref_type }} has been deleted"
