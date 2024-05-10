@@ -3,14 +3,9 @@ on:
   delete
 jobs:
   Job1:
+    if: ${{ startsWith(github.event.ref, 'feature/') }}
     runs-on: ubuntu-latest
     steps:
       - name: "Step1"
         run: |
-          echo "This job is triggered when ${{ github.event.ref_type }} ${{ github.event.ref }} has been deleted"
-          echo "Run next step if deleted branch is feature/*"
-
-      - name: "Step2"
-        if: ${{ startsWith(github.event.ref, 'feature/') }}
-        run: |
-          echo "Deleted branch is a feature branch"
+          echo "This job is triggered when a feature ${{ github.event.ref_type }}: ${{ github.event.ref }} has been deleted"
