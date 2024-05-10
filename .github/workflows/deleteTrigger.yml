@@ -7,4 +7,4 @@ jobs:
     steps:
       - name: "Step1"
         run: |
-          echo "This job is triggered when branch ${{ github.event.ref_type }} has been deleted"
+          echo "This job is triggered when ${{ github.event.ref_type }} ${{ github.event.ref }} has been deleted"
