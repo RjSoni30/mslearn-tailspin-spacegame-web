@@ -9,7 +9,10 @@ on:
 jobs:
   if_merged:
     if: github.event.pull_request.merged == true
+    env:
+      branch_name: $GITHUB_HEAD_REF${{ github.ref }}
     runs-on: ubuntu-latest
     steps:
     - run: |
-        echo The PR was merged
+        echo "Branch name is: $GITHUB_HEAD_REF${{ github.ref }}"
+        echo "env variable is: ${{ env.branch_name }}"
