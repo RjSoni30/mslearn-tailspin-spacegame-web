@@ -6,10 +6,12 @@ jobs:
     if: ${{ startsWith(github.event.ref, 'feature/') }}
     runs-on: ubuntu-latest
     env:
-      branch_name: ${{ GITHUB_HEAD_REF }}${{ github.event.ref }}
+      branch_name: ${{ github.event.ref }}${{ github.event.pull_request.head.ref }}
     steps:
       - name: "Step1"
         run: |
           echo "This job is triggered when a feature ${{ github.event.ref_type }}: ${{ github.event.ref }} has been deleted"
-          echo "Branch name is: ${{ GITHUB_HEAD_REF }}${{ github.event.ref }}"
+          echo "github.event.ref is: ${{ github.event.ref }}"
+          echo "github.event.pull_request.head_ref is: ${{ github.event.pull_request.head.ref }}"
+          echo "Event is: ${{ github.event.ref_type }}"
           echo "Env variable is: ${{ env.branch_name }}"
