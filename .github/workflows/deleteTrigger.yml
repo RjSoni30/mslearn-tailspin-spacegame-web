@@ -1,9 +1,11 @@
 name: "Delete Event Trigger Workflow Pipeline"
 on:
-  delete
+  delete:
+    branches:
+      - feature/**
 jobs:
   Job1:
-    if: ${{ startsWith(github.event.ref, 'feature/') }}
+    # if: ${{ startsWith(github.event.ref, 'feature/') }}
     runs-on: ubuntu-latest
     env:
       branch_name: ${{ github.event.ref }}${{ github.event.pull_request.head.ref }}
