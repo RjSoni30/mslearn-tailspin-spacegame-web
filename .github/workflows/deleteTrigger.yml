@@ -9,4 +9,4 @@ jobs:
       - name: "Step1"
         run: |
           echo "This job is triggered when a feature ${{ github.event.ref_type }}: ${{ github.event.ref }} has been deleted"
-          echo "Value of GITHUB_HEAD_REF is: $GITHUB_HEAD_REF"
+          echo "Value of github.ref is: ${{ github.ref }}"
