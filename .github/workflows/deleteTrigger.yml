@@ -8,7 +8,7 @@ on:
       - synchronize
 jobs:
   Job1:
-    if: ${{ startsWith(github.event.ref, 'feature/') || github.event_name = 'pull_request' }}
+    if: ${{ startsWith(github.event.ref, 'feature/') || github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     env:
       branch_name: ${{ github.event.ref }}${{ github.event.pull_request.head.ref }}
