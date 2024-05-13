@@ -15,5 +15,5 @@ jobs:
           echo "github.event.pull_request.head_ref is: ${{ github.event.pull_request.head.ref }}"
           echo "Event is: ${{ github.event.ref_type }}"
           echo "Env variable is: ${{ env.branch_name }}"
-          deletion_branch=$(echo "${{ env.branch_name }}" | cut -d '/' -f 2)
+          deletion_branch=${{ (echo env.branch_name " | cut -d '/' -f 2) }}
           echo "Deletion Branch is: $deletion_branch")
