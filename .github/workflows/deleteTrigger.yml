@@ -1,11 +1,14 @@
 name: "Delete Event Trigger Workflow Pipeline"
 on:
   delete:
-    branches:
-      - feature/*
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
 jobs:
   Job1:
-    # if: ${{ startsWith(github.event.ref, 'feature/') }}
+    if: ${{ startsWith(github.event.ref, 'feature/') || github.event_name = 'pull_request' }}
     runs-on: ubuntu-latest
     env:
       branch_name: ${{ github.event.ref }}${{ github.event.pull_request.head.ref }}
@@ -15,7 +18,7 @@ jobs:
           echo "This job is triggered when a feature ${{ github.event.ref_type }}: ${{ github.event.ref }} has been deleted"
           echo "github.event.ref is: ${{ github.event.ref }}"
           echo "github.event.pull_request.head_ref is: ${{ github.event.pull_request.head.ref }}"
-          echo "Event is: ${{ github.event.ref_type }}"
+          echo "Event is: ${{ github.event_name }}"
           echo "Env variable is: ${{ env.branch_name }}"
           deletion_branch=$(echo ${{ env.branch_name }} | cut -d '/' -f 2)
           echo "Deletion Branch is: $deletion_branch"
