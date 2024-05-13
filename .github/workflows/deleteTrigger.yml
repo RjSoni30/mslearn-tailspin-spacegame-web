@@ -2,7 +2,7 @@ name: "Delete Event Trigger Workflow Pipeline"
 on:
   delete:
     branches:
-      - feature/**
+      - feature/*
 jobs:
   Job1:
     # if: ${{ startsWith(github.event.ref, 'feature/') }}
