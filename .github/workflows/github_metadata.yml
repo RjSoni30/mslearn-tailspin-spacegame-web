@@ -1,0 +1,17 @@
+name: Print Github Event Metadata
+on:
+  pull_request:
+    branches:
+      - feature/test2
+    types: [opened, closed, reopened, synchronize]
+
+jobs:
+  printJob:    
+    name: Github Event Metadata
+    runs-on: ubuntu-latest
+    steps:
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: |
+        echo "$GITHUB_CONTEXT"
