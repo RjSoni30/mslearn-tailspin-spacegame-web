@@ -16,4 +16,4 @@ jobs:
       run: |
         echo "Printing Github Event Metadata"
         echo "$GITHUB_CONTEXT" > output.json
-        jq '.event.pull_request.labels[]' output.json
+        jq '.event.pull_request.labels' output.json
