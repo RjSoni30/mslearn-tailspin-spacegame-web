@@ -4,6 +4,11 @@ on:
     branches:
       - feature/test2
     types: [closed, labeled]
+  pull_request_review:
+    types:
+      - submitted
+      - edited
+      - dismissed
 
 jobs:
   printJob:    
