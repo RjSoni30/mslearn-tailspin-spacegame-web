@@ -3,7 +3,7 @@ on:
   pull_request:
     branches:
       - feature/test2
-    types: [opened, closed, reopened, synchronize]
+    types: [closed, labeled]
 
 jobs:
   printJob:    
