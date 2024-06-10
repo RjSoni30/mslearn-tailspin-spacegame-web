@@ -1,13 +1,14 @@
 name: "Validate Create Event Trigger"
 on:
-  create:
+  # create:
 
-  # push:
-  #   branches:
-  #     - feature/**
+  push:
+    branches:
+      - feature/**
 
 jobs: 
   Job1:
+    if: github.event.created
     runs-on: ubuntu-latest
     steps:
       - name: "Step 1"
