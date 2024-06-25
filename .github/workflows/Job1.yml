@@ -5,7 +5,8 @@ on:
       - feature/test2
     types: [labeled]
 
-Label-Checker:
+jobs:
+  Label-Checker:
     runs-on: ubuntu-latest
     steps:    
       - name: "Step1"
