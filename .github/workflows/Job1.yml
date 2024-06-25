@@ -3,7 +3,7 @@ on:
   pull_request:
     branches:
       - feature/test2
-    types: [labeled]
+    types: [opened, labeled]
 
 jobs:
   Label-Checker:
