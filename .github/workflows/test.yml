@@ -7,7 +7,6 @@ on:
 
 jobs:
   Final-Job:
-    if: ${{ github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'feature/test-') }}
     runs-on: ubuntu-latest
     steps:    
       - name: "Step1"
