@@ -1,0 +1,13 @@
+name: Job1 Pipeline
+on:
+  pull_request:
+    branches:
+      - feature/test2
+    types: [labeled]
+
+Label-Checker:
+    runs-on: ubuntu-latest
+    steps:    
+      - name: "Step1"
+        run: |
+          echo "Step 1"

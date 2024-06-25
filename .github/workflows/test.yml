@@ -3,25 +3,9 @@ on:
   pull_request:
     branches:
       - feature/test2
-    types: [opened, reopened, synchronize, closed, labeled, review_requested]
+    types: [closed]
 
 jobs:
-  Job1:
-    if: ${{ github.event.action != 'closed' && startsWith(github.event.pull_request.head.ref, 'feature/') }}
-    runs-on: ubuntu-latest
-    steps:    
-      - name: "Step1"
-        run: |
-          echo "Step 1"
-
-  Job2:
-    if: ${{ github.event.action != 'closed' && startsWith(github.event.pull_request.head.ref, 'feature/') }}
-    runs-on: ubuntu-latest
-    steps:    
-      - name: "Step1"
-        run: |
-          echo "Step 1"
-
   Job3:
     if: ${{ github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'feature/test-') }}
     runs-on: ubuntu-latest

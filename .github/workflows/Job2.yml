@@ -1,0 +1,13 @@
+name: Job2 Pipeline
+on:
+  pull_request:
+    branches:
+      - feature/test2
+    types: [opened, reopened, synchronize]
+
+  CI-Job:
+    runs-on: ubuntu-latest
+    steps:    
+      - name: "Step1"
+        run: |
+          echo "Step 1"
