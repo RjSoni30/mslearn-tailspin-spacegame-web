@@ -1,5 +1,6 @@
 name: Test Pipeline
 on:
+  merge_group:
   pull_request:
     branches:
       - feature/test2

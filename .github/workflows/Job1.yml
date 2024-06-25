@@ -1,9 +1,10 @@
 name: Job1 Pipeline
 on:
+  merge_group:
   pull_request:
     branches:
       - feature/test2
-    types: [opened, labeled]
+    types: [labeled]
 
 jobs:
   Label-Checker:
