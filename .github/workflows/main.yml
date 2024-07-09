@@ -11,6 +11,6 @@ jobs:
           echo "FORCE_RUN=" >> $GITHUB_ENV
           
       - name: "This is step2"
-        if: ${{ env.FORCE_RUN }} != ""
+        if: ! ${{ env.FORCE_RUN }} == ""
         run: |
           echo "Inside step2"
