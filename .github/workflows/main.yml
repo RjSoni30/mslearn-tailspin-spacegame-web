@@ -1,60 +1,16 @@
 name: Testing Workflow
-# on: workflow_dispatch
 on:
-  pull_request:
-    types:
-      - closed
-    branches:
-      - feature/test**
-env:
-  # Introducing quality gates for security scans & tests
-  # QG1 is ----
-  # QG2 is ----
-  # QG3 is ----
-
-  SKIP_QGS: "QG1 QG3" #Add <space> separated Quality Gates or ALL to skip one or more quality gates
-  FORCE_RUN: false    # Variable to forcefull run all the quality gates
+  push:
+  
 jobs:
   Job1:
     runs-on: ubuntu-latest
-    outputs:
-      output1: ${{ steps.step1.outputs.test }}
-      output2: ${{ steps.step1.outputs.branchName }}
-      output3: ${{ steps.step1.outputs.project }}
     steps:
       - name: "This is step1"
-        id: step1
         run: |
-          if [[ (${{ github.ref }} == 'refs/heads/master') ]]
-          then
-            projectname="Hi"
-            echo "project=$projectname" >> "$GITHUB_OUTPUT"
-          elif [[ ${{ github.ref }} == feature* ]]
-          then
-            echo "inside elif"
-          fi
+          echo "FORCE_RUN=true" >> $GITHUB_ENV
           
-          echo "test=${{ env.SKIP_QGS }}" >> "$GITHUB_OUTPUT"
-
-          if [ '${{ ( startsWith(github.ref, 'refs/heads/master') || startsWith(github.ref, 'refs/heads/release/*') ) }}' == 'true' ]; then
-            echo "branchName=true" >> "$GITHUB_OUTPUT"
-          fi
       - name: "This is step2"
+        if: null(${{ env.FORCE_RUN }})
         run: |
           echo "Inside step2"
-          echo "User is: ${{ github.event.pull_request.user.login }}"
-          echo "Value of Project: ${{ needs.Job1.outputs.output3 }}"
-  
-  # Job2:
-  #   needs: Job1
-  #   if: ${{ ( !( (contains(needs.Job1.outputs.output1, 'QG2')) || (contains(needs.Job1.outputs.output1, 'QG1')) ) || (needs.Job1.outputs.output2) ) }}
-  #   uses: ./.github/workflows/CalledWF.yml
-
-  # Job4:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Running Powershell script
-  #       shell: pwsh
-  #       run: |
-  #         Write-Host $env:GITHUB_WORKSPACE
-          
