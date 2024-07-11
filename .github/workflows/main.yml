@@ -9,11 +9,7 @@ jobs:
       matrix:
         run-count: [One, Two]
       max-parallel: 1
-    environment:
-      name: Test
     steps:
-      - run: echo "Approval Completed"
-      
       - name: "This is step1"
         run: |
           echo "Inside step2"
@@ -23,3 +19,17 @@ jobs:
         if: ${{ env.FORCE_RUN != '' }}
         run: |
           echo "Inside step2"
+
+  Job2:
+    runs-on: ubuntu-latest
+    needs: Job1
+    environment:
+      name: Approval-Gate
+    steps:
+      - run: echo "This is job2"
+
+  Job3:
+    runs-on: ubuntu-latest
+    needs: Job2
+    steps:
+      - run: echo "This is job2"
