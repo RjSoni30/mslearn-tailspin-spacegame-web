@@ -5,6 +5,12 @@ on:
 jobs:
   Job1:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        run-count: [One, Two]
+      max-parallel: 1
+    environment:
+      name: Test
     steps:
       - name: "This is step1"
         run: |
