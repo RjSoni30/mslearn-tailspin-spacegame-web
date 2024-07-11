@@ -12,7 +12,7 @@ jobs:
     environment:
       name: Test
     steps:
-      - name: echo "Approval Completed"
+      - run: echo "Approval Completed"
       
       - name: "This is step1"
         run: |
