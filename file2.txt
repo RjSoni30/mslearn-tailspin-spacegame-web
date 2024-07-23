@@ -1,2 +1,4 @@
 This is file2 coming from branch2
 This file chagne need to be kept.
+
+adding a new commit
