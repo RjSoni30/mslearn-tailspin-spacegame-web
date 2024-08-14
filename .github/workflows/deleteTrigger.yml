@@ -4,7 +4,7 @@ on:
 
 jobs:
   Delete-Sonar-Project:
-    if: ${{ startsWith(github.event.ref, 'refs/heads/feature/') || startsWith(github.event.ref, 'refs/heads/fix/') || startsWith(github.event.ref, 'refs/heads/hotfix/') }}
+    # if: ${{ startsWith(github.event.ref, 'refs/heads/feature/') || startsWith(github.event.ref, 'refs/heads/fix/') || startsWith(github.event.ref, 'refs/heads/hotfix/') }}
     runs-on: ubuntu-latest
     steps:
       - name: "Print Message"
