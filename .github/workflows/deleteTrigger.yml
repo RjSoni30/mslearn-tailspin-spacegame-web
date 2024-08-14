@@ -1,24 +1,12 @@
-name: "Delete Event Trigger Workflow Pipeline"
+name: Cleanup pipeline on branch deletion
 on:
   delete:
-  pull_request:
-    types:
-      - opened
-      - reopened
-      - synchronize
+
 jobs:
-  Job1:
-    if: ${{ startsWith(github.event.ref, 'feature/') || github.event_name == 'pull_request' }}
+  Delete-Sonar-Project:
+    if: ${{ startsWith(github.event.ref, 'refs/heads/feature/') || startsWith(github.event.ref, 'refs/heads/fix/') || startsWith(github.event.ref, 'refs/heads/hotfix/') }}
     runs-on: ubuntu-latest
-    env:
-      branch_name: ${{ github.event.ref }}${{ github.event.pull_request.head.ref }}
     steps:
-      - name: "Step1"
+      - name: "Print Message"
         run: |
-          echo "This job is triggered when a feature ${{ github.event.ref_type }}: ${{ github.event.ref }} has been deleted"
-          echo "github.event.ref is: ${{ github.event.ref }}"
-          echo "github.event.pull_request.head_ref is: ${{ github.event.pull_request.head.ref }}"
-          echo "Event is: ${{ github.event_name }}"
-          echo "Env variable is: ${{ env.branch_name }}"
-          deletion_branch=$(echo ${{ env.branch_name }} | cut -d '/' -f 2)
-          echo "Deletion Branch is: $deletion_branch"
+          echo "Branch Deleted: ${{ github.event.ref }}"
