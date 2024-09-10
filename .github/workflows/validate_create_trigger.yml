@@ -29,16 +29,21 @@ jobs:
 
           echo "Matrix Value is: $list"
           echo "matrix_value=$list" >> $GITHUB_OUTPUT
+
+  extra-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: step1
+        run: |
+          echo "This is step1"
     
   Job1:
     # if: github.event.created
-    needs: set-matrix
+    needs: [set-matrix, extra-job]
     runs-on: ubuntu-latest
-    env:
-      matrix_list: ${{ needs.set-matrix.outputs.matrix_value }}
     strategy:
       matrix:
-        solution_name: ${{ fromJSON(env.matrix_list) }}
+        solution_name: ${{ fromJSON(needs.set-matrix.outputs.matrix_value) }}
       max-parallel: 1
     steps:
       - name: "Step 1"
