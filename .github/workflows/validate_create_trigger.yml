@@ -16,10 +16,10 @@ jobs:
         id: set_matrix
         run: |
           echo "Setting matrix for ${{ vars.SOLUTION_LIST }}"
-          values="${{ vars.SOLUTION_LIST }}"
+          # values="${{ vars.SOLUTION_LIST }}"
           list="["
           
-          for item in $values
+          for item in ${{ vars.SOLUTION_LIST }}
           do
             list=${list}"\"$item\","
           done
