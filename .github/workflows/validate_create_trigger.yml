@@ -19,7 +19,6 @@ jobs:
           values=${{ vars.SOLUTION_LIST }}
           list="["
           
-          IFS=","
           for item in $values
           do
             list=${list}"\"$item\","
