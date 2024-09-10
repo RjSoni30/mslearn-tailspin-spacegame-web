@@ -7,12 +7,35 @@ on:
       - feature/**
 
 jobs: 
+  set-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix_value: ${{ steps.set_matrix.outputs.matrix_value }}
+    steps:
+      - name: set matrix
+        id: set_matrix
+        run: |
+          echo "Setting matrix"
+          list="["
+          
+          IFS=","
+          for item in ${{ var.SOLUTION_LIST }}
+          do
+            list=${list}"\"$item\","
+          done
+
+          list=$(echo ${list::-1})
+          list=${list}]
+
+          echo "matrix_value=$list" >> $GITHUB_OUTPUT
+    
   Job1:
     # if: github.event.created
+    needs: set-matrix
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        solution_name: ["${{ fromJson(vars.SOLUTION_LIST) }}"]
+        solution_name: ${{ needs.set-matrix.outputs.matrix_value }}
       max-parallel: 1
     steps:
       - name: "Step 1"
