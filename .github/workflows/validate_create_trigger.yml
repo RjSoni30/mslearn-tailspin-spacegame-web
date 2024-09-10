@@ -15,7 +15,7 @@ jobs:
       - name: set matrix
         id: set_matrix
         run: |
-          echo "Setting matrix"
+          echo "Setting matrix for ${{ vars.SOLUTION_LIST }}"
           list="["
           
           IFS=","
