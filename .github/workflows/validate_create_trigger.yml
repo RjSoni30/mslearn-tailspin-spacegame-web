@@ -34,9 +34,11 @@ jobs:
     # if: github.event.created
     needs: set-matrix
     runs-on: ubuntu-latest
+    env:
+      matrix_list: ${{ fromJSON(needs.set-matrix.outputs.matrix_value) }}
     strategy:
       matrix:
-        solution_name: ${{ fromJSON(needs.set-matrix.outputs.matrix_value) }}
+        solution_name: ${{ env.matrix_list }}
       max-parallel: 1
     steps:
       - name: "Step 1"
