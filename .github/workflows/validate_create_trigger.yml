@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        solution_name: ${{ fromJson(vars.SOLUTION_LIST) }}
+        solution_name: ["${{ fromJson(vars.SOLUTION_LIST) }}"]
       max-parallel: 1
     steps:
       - name: "Step 1"
