@@ -27,6 +27,7 @@ jobs:
           list=$(echo ${list::-1})
           list=${list}]
 
+          echo "Matrix Value is: $list"
           echo "matrix_value=$list" >> $GITHUB_OUTPUT
     
   Job1:
