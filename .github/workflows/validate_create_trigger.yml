@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        solution_name: ${{ needs.set-matrix.outputs.matrix_value }}
+        solution_name: ${{ fromJSON(needs.set-matrix.outputs.matrix_value) }}
       max-parallel: 1
     steps:
       - name: "Step 1"
