@@ -35,10 +35,10 @@ jobs:
     needs: set-matrix
     runs-on: ubuntu-latest
     env:
-      matrix_list: ${{ fromJSON(needs.set-matrix.outputs.matrix_value) }}
+      matrix_list: ${{ needs.set-matrix.outputs.matrix_value }}
     strategy:
       matrix:
-        solution_name: ${{ env.matrix_list }}
+        solution_name: ${{ fromJSON(env.matrix_list) }}
       max-parallel: 1
     steps:
       - name: "Step 1"
