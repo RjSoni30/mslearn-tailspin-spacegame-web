@@ -19,7 +19,7 @@ jobs:
           list="["
           
           IFS=","
-          for item in ${{ var.SOLUTION_LIST }}
+          for item in ${{ vars.SOLUTION_LIST }}
           do
             list=${list}"\"$item\","
           done
