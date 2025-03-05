@@ -1,11 +1,12 @@
 name: Test Workflow
-on: workflow_dispatch
+on:
+  create:
+  delete:
 jobs:
   Job1:
     runs-on: ubuntu-latest
-    environment: Test
     steps:
       - name: "This is step1"
-        id: step1
         run: |
-          echo "Hi"
+          echo "Github event ref: ${{ github.event.ref }}"
+          echo "Github ref: ${{ github.ref }}"
