@@ -12,12 +12,5 @@ jobs:
       - name: "This is step1"
         run: |
           echo "Start step1"
-
-      - name: "Wait statement"
-        uses: actions/wait@v1
-        with:
-          time: '180s'
-
-      - name: "This is step2"
-        run: |
-          echo "Start step2"
+          sleep 120
+          echo "End step1"
