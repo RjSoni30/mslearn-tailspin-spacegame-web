@@ -3,7 +3,7 @@ on: workflow_dispatch
 
 concurrency:
   group: test-pipeline
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   Job1:
