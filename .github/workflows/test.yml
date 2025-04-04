@@ -1,13 +1,29 @@
 name: Test Workflow
 on:
-  create:
-  delete:
+  push:
 jobs:
   Job1:
-    if: ${{ contains(github.event.ref, 'feature/') || contains(github.event.ref, 'fix/') || contains(github.event.ref, 'hotifx/') }}
     runs-on: ubuntu-latest
     steps:
-      - name: "This is step1"
+      - name: "Prepare artifact files"
         run: |
-          echo "Github event ref: ${{ github.event.ref }}"
-          echo "Github ref: ${{ github.ref }}"
+          mkdir -p dir1/dir2
+          touch dir1/dir2/file.txt
+
+      - name: "Upload artifact"
+        uses: actions/upload-artifact@v4
+        with:
+          path: ${{ github.workspace }}/dir1/dir2/file.txt
+
+  Job2:
+    needs: Job1
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Download Artifact"
+        uses: actions/download-artifact@v4
+        with:
+          path: ${{ github.workspace }}
+      
+      - name: "Validate file"
+        run: |
+          ls -lart
