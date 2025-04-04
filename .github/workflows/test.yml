@@ -27,3 +27,4 @@ jobs:
       - name: "Validate file"
         run: |
           ls -lart
+          ls -lart artifact
