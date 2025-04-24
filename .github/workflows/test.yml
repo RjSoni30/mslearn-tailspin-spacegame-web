@@ -20,4 +20,4 @@ jobs:
       - name: "Validate JSON data"
         run: |
           echo "function app"
-          echo "${{ needs.Job1.outputs.json_data }}" | jq -c '.'
+          echo '${{ needs.Job1.outputs.json_data }}' | jq '.'
