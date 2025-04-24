@@ -20,6 +20,6 @@ jobs:
       - name: "Validate JSON data"
         run: |
           echo "function app"
-          echo "${{ needs.Job1.outputs.json_data }}" | jq '.[] | .func'
+          echo "${{ needs.Job1.outputs.json_data }}" | jq -c '.[] | .func'
           echo "slot name"
-          echo "${{ needs.Job1.outputs.json_data }}" | jq '.[] | .slot'
+          echo "${{ needs.Job1.outputs.json_data }}" | jq -c   '.[] | .slot'
