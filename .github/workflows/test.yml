@@ -4,23 +4,33 @@ on:
 jobs:
   Job1:
     runs-on: ubuntu-latest
-    outputs:
-      json_data: ${{ steps.set_json_data.outputs.json_data }}
+    # outputs:
+    #   json_data: ${{ steps.set_json_data.outputs.json_data }}
     steps:
-      - name: "Create JSON data"
-        id: set_json_data
-        run: |
-          json_data='[{"func":"func1","slot":"slot1"},{"func":"func2","slot":"slot2"}]'
-          echo "json_data=$json_data" >> $GITHUB_OUTPUT
+      # - name: "Create JSON data"
+      #   id: set_json_data
+      #   run: |
+      #     json_data='[{"func":"func1","slot":"slot1"},{"func":"func2","slot":"slot2"}]'
+      #     echo "json_data=$json_data" >> $GITHUB_OUTPUT
 
-  Job2:
-    needs: Job1
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        json_object: ${{ fromJson(needs.Job1.outputs.json_data) }}
-    steps:
-      - name: "Validate JSON data"
+      - name: "create a file"
         run: |
-          echo "function name is: ${{ matrix.json_object.func }}"
-          echo "slot name is: ${{ matrix.json_object.slot }}"
+          echo "\$value" > file.properties
+
+      - name: "env subst"
+        env:
+          value: Something
+        run: |
+          cat file.properties | envsubst
+
+  # Job2:
+  #   needs: Job1
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       json_object: ${{ fromJson(needs.Job1.outputs.json_data) }}
+  #   steps:
+  #     - name: "Validate JSON data"
+  #       run: |
+  #         echo "function name is: ${{ matrix.json_object.func }}"
+  #         echo "slot name is: ${{ matrix.json_object.slot }}"
