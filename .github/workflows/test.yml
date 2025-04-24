@@ -18,6 +18,7 @@ jobs:
         with:
           sparse-checkout: |
             README.md
+          sparse-checkout-cone-mode: false
 
       - name: "validate sprase checkout files"
         run: |
