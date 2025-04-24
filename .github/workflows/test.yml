@@ -13,15 +13,15 @@ jobs:
       #     json_data='[{"func":"func1","slot":"slot1"},{"func":"func2","slot":"slot2"}]'
       #     echo "json_data=$json_data" >> $GITHUB_OUTPUT
 
-      - name: "create a file"
-        run: |
-          echo "\$value" > file.properties
+      - name: "sparse checkout"
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            README.md
 
-      - name: "env subst"
-        env:
-          value: Something
+      - name: "validate sprase checkout files"
         run: |
-          cat file.properties | envsubst
+          ls -alrt
 
   # Job2:
   #   needs: Job1
