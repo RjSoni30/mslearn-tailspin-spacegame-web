@@ -5,26 +5,15 @@ jobs:
   Job1:
     runs-on: ubuntu-latest
     steps:
-      - name: "Prepare artifact files"
+      - name: "Create JSON data"
         run: |
-          mkdir -p dir1/dir2
-          touch dir1/dir2/file.txt
-
-      - name: "Upload artifact"
-        uses: actions/upload-artifact@v4
-        with:
-          path: ${{ github.workspace }}/dir1/dir2/file.txt
+          json_data='[{"func":"func1","slot":"slot1"},{"func":"func2","slot":"slot2"}]'
+          echo "json_data=$json_data" >> $GITHUB_ENV
 
   Job2:
     needs: Job1
     runs-on: ubuntu-latest
     steps:
-      - name: "Download Artifact"
-        uses: actions/download-artifact@v4
-        with:
-          path: ${{ github.workspace }}
-      
-      - name: "Validate file"
+      - name: "Validate JSON data"
         run: |
-          ls -lart
-          ls -lart artifact
+          echo "${{ needs.Job1.outputs.json_data }}"
