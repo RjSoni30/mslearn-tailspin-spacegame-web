@@ -16,8 +16,10 @@ jobs:
   Job2:
     needs: Job1
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        json_object: ${{ fromJson(needs.Job1.outputs.json_data) }}
     steps:
       - name: "Validate JSON data"
         run: |
-          echo "function app"
-          echo '${{ needs.Job1.outputs.json_data }}' | jq '.'
+          echo "object is: ${{ matrix.json_object }}"
