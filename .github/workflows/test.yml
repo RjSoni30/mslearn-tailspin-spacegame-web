@@ -10,7 +10,7 @@ jobs:
       - name: "Create JSON data"
         id: set_json_data
         run: |
-          json_data='[{"func":"func1"},{"func":"func2"}]'
+          json_data='[{"func":"func1","slot":"slot1"},{"func":"func2","slot":"slot2"}]'
           echo "json_data=$json_data" >> $GITHUB_OUTPUT
 
   Job2:
@@ -22,4 +22,5 @@ jobs:
     steps:
       - name: "Validate JSON data"
         run: |
-          echo "object is: ${{ matrix.json_object }}"
+          echo "function name is: ${{ matrix.json_object.func }}"
+          echo "slot name is: ${{ matrix.json_object.slot }}"
