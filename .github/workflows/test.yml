@@ -10,7 +10,7 @@ jobs:
       - name: "Create JSON data"
         id: set_json_data
         run: |
-          json_data='[{"func":"func1","slot":"slot1"},{"func":"func2","slot":"slot2"}]'
+          json_data='[{"func":"func1"},{"func":"func2"}]'
           echo "json_data=$json_data" >> $GITHUB_OUTPUT
 
   Job2:
