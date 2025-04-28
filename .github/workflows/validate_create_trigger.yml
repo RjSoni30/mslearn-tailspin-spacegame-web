@@ -1,45 +1,16 @@
 name: "Validate Create Event Trigger"
 on:
-  # create:
-
   push:
-    branches:
-      - feature/**
 
 jobs: 
   set-matrix:
     runs-on: ubuntu-latest
-    outputs:
-      matrix_value: ${{ steps.set_matrix.outputs.matrix_value }}
-    steps:
-      - name: set matrix
-        id: set_matrix
-        run: |
-          echo "Setting matrix for ${{ vars.SOLUTION_LIST }}"
-          # values="${{ vars.SOLUTION_LIST }}"
-          list="["
-          
-          for item in ${{ vars.SOLUTION_LIST }}
-          do
-            list=${list}"\"$item\","
-          done
-
-          list=$(echo ${list::-1})
-          list=${list}]
-
-          echo "Matrix Value is: $list"
-          echo "matrix_value=$list" >> $GITHUB_OUTPUT
-    
-  Job1:
-    # if: github.event.created
-    needs: [set-matrix]
-    runs-on: ubuntu-latest
     strategy:
       matrix:
-        solution_name: ${{ fromJSON(needs.set-matrix.outputs.matrix_value) }}
-      max-parallel: 1
+        parameter1: ["1","2","3","4"]
+        parameter2: ["a","b"]
+      max-parallel: 4
     steps:
-      - name: "Step 1"
+      - name: set matrix
         run: |
-          echo "Solution Name: ${{ matrix.solution_name }}"
-          sleep 2m
+          echo "This is step1"
