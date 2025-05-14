@@ -5,12 +5,10 @@ jobs:
   Job1:
     runs-on: ubuntu-latest
     env:
-      mule_key_value: "Password@123"
-      mule_key_name: "mule_key_value"
+      mule_key_value1: "Password@123"
+      mule_key_value2: "Password@456"
     steps:
       - name: "Read Env Variable"
         run: |
-          echo "1. Mule Key is: ${mule_key_value}"
-
-          mule_key_name=${{ env.mule_key_name }}
+          mule_key_name=${{ env.mule_key_value2 }}
           echo "2. Mule Key is: ${!mule_key_name}"
