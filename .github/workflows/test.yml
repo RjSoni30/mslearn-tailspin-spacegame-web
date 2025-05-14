@@ -4,34 +4,13 @@ on:
 jobs:
   Job1:
     runs-on: ubuntu-latest
-    # outputs:
-    #   json_data: ${{ steps.set_json_data.outputs.json_data }}
+    env:
+      mule_key_value: "Password@123"
+      mule_key_name: "mule_key_value"
     steps:
-      # - name: "Create JSON data"
-      #   id: set_json_data
-      #   run: |
-      #     json_data='[{"func":"func1","slot":"slot1"},{"func":"func2","slot":"slot2"}]'
-      #     echo "json_data=$json_data" >> $GITHUB_OUTPUT
-
-      - name: "sparse checkout"
-        uses: actions/checkout@v4
-        with:
-          sparse-checkout: |
-            README.md
-          sparse-checkout-cone-mode: false
-
-      - name: "validate sprase checkout files"
+      - name: "Read Env Variable"
         run: |
-          ls -alrt
+          echo "1. Mule Key is: ${mule_key_value}"
 
-  # Job2:
-  #   needs: Job1
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       json_object: ${{ fromJson(needs.Job1.outputs.json_data) }}
-  #   steps:
-  #     - name: "Validate JSON data"
-  #       run: |
-  #         echo "function name is: ${{ matrix.json_object.func }}"
-  #         echo "slot name is: ${{ matrix.json_object.slot }}"
+          mule_key_name=${{ env.mule_key_name }}
+          echo "2. Mule Key is: ${!mule_key_name}"
