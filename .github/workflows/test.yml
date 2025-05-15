@@ -1,11 +1,10 @@
 name: Test Workflow
 on:
   push:
-env:
-  run_job: 'true'
+
 jobs:
   Job1:
-    if: ${{ env.run_job == 'false' }}
+    if: true
     runs-on: ubuntu-latest
     steps:
       - name: "Step1"
@@ -13,7 +12,7 @@ jobs:
           echo "Step1"
 
   Job2:
-    if: ${{ env.run_job == 'true' }}
+    if: false
     runs-on: ubuntu-latest
     steps:
       - name: "Step1"
