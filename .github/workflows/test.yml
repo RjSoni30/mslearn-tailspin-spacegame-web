@@ -21,6 +21,7 @@ jobs:
 
   Job3:
     needs: [Job1, Job2]
+    if: ${{ needs.Job1.result == 'success' || needs.Job2.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: "Step1"
