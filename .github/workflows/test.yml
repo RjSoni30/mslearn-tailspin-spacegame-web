@@ -4,26 +4,11 @@ on:
 
 jobs:
   Job1:
-    if: true
     runs-on: ubuntu-latest
+    env:
+      value1: 'this is value1'
     steps:
       - name: "Step1"
         run: |
           echo "Step1"
-
-  Job2:
-    if: false
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Step1"
-        run: |
-          echo "Step1"
-
-  Job3:
-    needs: [Job1, Job2]
-    if: ${{ always() && (needs.Job1.result == 'success' || needs.Job2.result == 'success') }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Step1"
-        run: |
-          echo "Step1"
+          echo "${value1}"
